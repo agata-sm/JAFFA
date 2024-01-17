@@ -114,7 +114,7 @@ RUN find /opt/bpipe/bin -type f -exec ln -s '{}' /usr/local/bin/ \;
 # install R dependencies (required by JAFFA)
 RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("IRanges")'
 
-# install jaffa
+# install jaffa from own form
 RUN git clone https://github.com/agata-sm/JAFFA.git -b main
 RUN mkdir -p JAFFA/tools/bin
 RUN g++ -std=c++11 -O3 -o JAFFA/tools/bin/process_transcriptome_align_table JAFFA/src/process_transcriptome_align_table.c++
