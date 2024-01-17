@@ -1,8 +1,7 @@
 FROM ubuntu:18.04
 
-MAINTAINER Rebecca Louise Evans (rebecca.louise.evans@gmail.com)
-
-LABEL Description="This image is used to run JAFFA" Version="2.1"
+LABEL Description="This image is used to run JAFFA" Version="2.4_dev"
+LABEL use own fork which has added qin=33 to ReformatReads (NBIS proj 6556)
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -116,7 +115,7 @@ RUN find /opt/bpipe/bin -type f -exec ln -s '{}' /usr/local/bin/ \;
 RUN Rscript -e 'source("http://bioconductor.org/biocLite.R")' -e 'biocLite("IRanges")'
 
 # install jaffa
-RUN git clone https://github.com/Oshlack/JAFFA.git -b master
+RUN git clone https://github.com/agata-sm/JAFFA.git -b main
 RUN mkdir -p JAFFA/tools/bin
 RUN g++ -std=c++11 -O3 -o JAFFA/tools/bin/process_transcriptome_align_table JAFFA/src/process_transcriptome_align_table.c++
 RUN g++ -O3 -o JAFFA/tools/bin/extract_seq_from_fasta JAFFA/src/extract_seq_from_fasta.c++
