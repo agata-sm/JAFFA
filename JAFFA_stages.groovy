@@ -244,7 +244,7 @@ get_unmapped = {
             ""","get_unmapped"
         }
         exec """
-            $reformat ignorebadquality=t in=${output.dir}/unmapped.fastq out=${output.dir}/temp.fasta threads=$threads -qin=${scores} ;
+            $reformat ignorebadquality=t in=${output.dir}/unmapped.fastq out=${output.dir}/temp.fasta threads=$threads qin=${scores} ;
             $dedupe sort=d in=${output.dir}/temp.fasta out=$output1 threads=$threads absorbcontainment=f;
             rm ${output.dir}/temp.fasta ${output.dir}/unmapped.fastq 2> /dev/null
         ""","get_unmapped"
@@ -276,7 +276,7 @@ get_assembly_unmapped = {
             ${bowtie2}-build ${output.dir}/${branch}.fasta ${output.dir}/${branch} ;
             $bowtie2 -k1 -p $threads --un ${output.dir}/unmapped_assembly.fastq -x ${output.dir}/${branch} -U ${output.dir}/unmapped_ref.fastq
                   -S /dev/null 2>&1 | tee ${output.dir}/log_initial_map_to_assembly ;
-            $reformat ignorebadquality=t in=${output.dir}/unmapped_assembly.fastq out=${output.dir}/temp.fasta threads=$threads -qin=${scores};
+            $reformat ignorebadquality=t in=${output.dir}/unmapped_assembly.fastq out=${output.dir}/temp.fasta threads=$threads qin=${scores};
             $dedupe sort=d in=${output.dir}/temp.fasta out=$output1 threads=$threads absorbcontainment=f ;
             rm ${output.dir}/temp.fasta ${output.dir}/unmapped_assembly.fastq ${output.dir}/unmapped_ref.fastq
         ""","get_unmapped"
