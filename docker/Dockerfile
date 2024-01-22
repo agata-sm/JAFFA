@@ -5,6 +5,8 @@ LABEL use own fork which has added qin=33 to ReformatReads (NBIS proj 6556) and 
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+
+
 RUN apt-get update -y \
     && apt-get install -y \
         bowtie2 \
@@ -16,6 +18,7 @@ RUN apt-get update -y \
         libpng-dev \
         libtool \
         lmod \
+        locales \
         make \
         openjdk-8-jdk \
         python \
@@ -28,6 +31,18 @@ RUN apt-get update -y \
         zlib1g-dev \
     && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
     && rm -rf /var/lib/apt/lists/*
+
+
+# Set the locale to get rid of warning
+# from https://stackoverflow.com/questions/28405902/how-to-set-the-locale-inside-a-debian-ubuntu-docker-container
+RUN touch /usr/share/locale/locale.alias
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8   
+
+
 
 VOLUME /data/batch
 
