@@ -128,7 +128,7 @@ RUN g++ -O3 -o JAFFA/tools/bin/extract_seq_from_fasta JAFFA/src/extract_seq_from
 RUN g++ -std=c++11 -O3 -o JAFFA/tools/bin/make_simple_read_table JAFFA/src/make_simple_read_table.c++
 #RUN g++ -std=c++11 -O3 -o JAFFA/bin/bypass_genomic_alignment JAFFA/src/bypass_genomic_alignment.c++
 # compile make_3_gene_fusion_table - not included earlier; as in install_linux64.sh
-RUN g++ -std=c++11 -O3 -o JAFFA/tools/bin/make_3_gene_fusion_table ../src/make_3_gene_fusion_table.c++
+RUN g++ -std=c++11 -O3 -o JAFFA/tools/bin/make_3_gene_fusion_table JAFFA/src/make_3_gene_fusion_table.c++
 ENV PATH ${PATH}:/opt/JAFFA/tools/bin
 
 # set the tools
