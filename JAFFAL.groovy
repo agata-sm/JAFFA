@@ -17,7 +17,7 @@ get_fasta = {
    doc "Converting fastqs to fasta"
    output.dir=jaffa_output+branch
    produce(branch+".fasta"){
-      exec "$reformat ignorebadquality=t in=$input out=$output threads=$threads ;"
+      exec "$reformat ignorebadquality=t in=$input out=$output threads=$threads qin=33;"
    }
 }
 
